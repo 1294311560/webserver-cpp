@@ -17,5 +17,9 @@
     当前活动事件revents会保存在Channel中，供Channel::handleEvent()使用  
     Poller::updateChannel()的主要功能是负责维护和更新pollfds_数组  
 
+   '''
+      编译命令： make
+      运行命令:  ./main
+   '''
 
    ![proactor.png](./proactor.png)
