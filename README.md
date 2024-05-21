@@ -8,7 +8,6 @@
 
     webserver-1.0构成了Reactor模式的核心内容，作为webserver的基础框架
 
-    ![proactor.png](./webserver-1.0/proactor.png)
 
 ## webserver-1.1
 
@@ -18,4 +17,9 @@
 
     详见webserver-1.1/README
 
-    ![1716293539156.jpg](./webserver-1.1/1716293539156.jpg)
+
+## webserver-1.2
+
+    webserver-1.2在1.1的基础上实现了EventLoopThread类，这个类封装了线程和EentLoop的创建过程  
+
+    到目前为止，Reactor事件处理框架已初具规模，接下来该实现网络功能了

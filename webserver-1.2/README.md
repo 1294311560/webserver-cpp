@@ -1,0 +1,7 @@
+# webserver-1.2
+
+实现EentLoopThread类
+
+EventLoopThread提供了对应eventloop和thread的封装，EventLoopThread可以创建一个IO线程,并执行loop
+
+startLoop函数会返回新线程中EventLoop对象的地址，因此用条件变量来等待线程的创建与运行
