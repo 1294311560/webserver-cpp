@@ -96,9 +96,11 @@ TimerId EventLoop::runEvery(double interval, const TimerCallback &cb) {
 
 void EventLoop::runInLoop(const Functor &cb) {
     if(isInLoopThread()) {
+        std::cout<<"is InLoopThread"<<std::endl;
         cb();
     }
     else {
+        std::cout<<"is not InLoopThread"<<std::endl;
         queueInLoop(cb);
     }
 }
@@ -118,6 +120,7 @@ void EventLoop::doPendingFunctors() {
     callingPendingFunctors_ = true;
     mutex_.lock();
     functors.swap(pendingFunctors_);
+    mutex_.unlock();
     for(size_t i = 0; i < functors.size(); i++) {
         functors[i]();
     } 

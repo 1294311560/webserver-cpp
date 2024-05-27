@@ -1,13 +1,23 @@
 #include "EventLoopThread.h"
 
 
-EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string& name) 
-    : loop_(nullptr), 
-      exiting_(false),
-      thread_(std::bind(&EventLoopThread::threadFunc, this)),
-      mutex_(),
-      cond_(),
-      callback_(cb)
+// EventLoopThread::EventLoopThread(const ThreadInitCallback& cb, const std::string& name) 
+//     : loop_(nullptr), 
+//       exiting_(false),
+//       thread_(std::bind(&EventLoopThread::threadFunc, this)),
+//       mutex_(),
+//       cond_(),
+//       callback_(cb)
+// {
+
+// }
+
+EventLoopThread::EventLoopThread()
+  : loop_(NULL),
+    exiting_(false),
+    thread_(std::bind(&EventLoopThread::threadFunc, this)),
+    mutex_(),
+    cond_()
 {
 
 }
@@ -34,10 +44,10 @@ EventLoop* EventLoopThread::startLoop() {
 void EventLoopThread::threadFunc()
 {
     EventLoop loop;
-    if(callback_)
-    {
-        callback_(&loop);
-    }
+    // if(callback_)
+    // {
+    //     callback_(&loop);
+    // }
 
     {
         std::unique_lock<std::mutex> lock(mutex_);
@@ -46,6 +56,6 @@ void EventLoopThread::threadFunc()
     }
 
     loop.loop(); //EventLoop loop => Poller.poll
-    std::unique_lock<std::mutex> lock(mutex_);
-    loop_=nullptr;
+    // std::unique_lock<std::mutex> lock(mutex_);
+    // loop_=nullptr;
 }
