@@ -1,8 +1,8 @@
 # webserver-1.3
 
-实现网络编成部分，通过调用linux的网络接口系统调用来实现
+实现网络编程部分，通过调用linux的网络接口系统调用来实现
 
-SocketsOp 封装了一些socket的操作，包括创建socket、close、listen、bind、accept，以及字序转化
+SocketsOp 封装了一些socket的操作，包括创建socket、close、listen、bind、accept，以及字节序转化
 
 Socket封装了socket文件描述符，并通过RAII来管理该socket，当socket生命周期结束时，会通过析构函数自动调用close关闭socket
 
