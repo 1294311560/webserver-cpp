@@ -1,0 +1,11 @@
+# webserver-1.6
+
+实现多线程功能 EventLoopThreadPool
+
+多线程TcpServer自己的EventLoop只用来接受新连接，而新连接会用其他EventLoop来执行IO（单线程TcpServer的EventLoop是与TcpConnection共享的）
+
+TcpServer每次新建一个TcpConnection就会调用getNextLoop()来取得EventLoop，如果是单线程服务，每次返回的都是baseLoop_，即TcpServer自己用的那个loop。
+
+连接的销把原来的removeConnection()拆为两个函数，因为TcpConnection会在自己的ioLoop线程调用removeConnection()，所以需要把它移到TcpServer的loop_线程（因为TcpServer是无锁的）。再次把connectDestroyed()移到TcpConnection的ioLoop线程进行，是为了保证TcpConnection的ConnectionCallback始终在其ioLoop回调
+
+setThreadNum()设置EventLoopThreadPool中线程的数量
