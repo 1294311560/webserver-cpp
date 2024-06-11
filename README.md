@@ -42,4 +42,12 @@
 
 ## webserver-1.6
 
-实现多线程功能 EventLoopThreadPool
+    实现多线程功能 EventLoopThreadPool
+
+## webserver-1.7
+
+    实现主动建立连接
+
+    实现Connector类，负责建立socket连接
+
+    TcpClient类，封装了客户端操作，调用Connector接口，建立连接，收发数据
